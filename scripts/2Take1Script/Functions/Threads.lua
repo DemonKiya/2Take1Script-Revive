@@ -135,7 +135,7 @@ function d.Upgradevehicles(l)
     local B = entity.get_entity_speed(l)
     a.request_ctrl(l)
     entity.freeze_entity(l, true)
-    a.MaxVehicle(l)
+    a.MaxVehicle(l, 4)
     entity.freeze_entity(l, false)
     vehicle.set_vehicle_forward_speed(l, B)
 end
