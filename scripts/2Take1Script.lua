@@ -10135,19 +10135,34 @@ local cf =
             "toggle",
             t.Parent["Vehicle Manager"],
             function(V)
+                local emergency_vehicles = {"AMBULANCE","FBI","FBI2","FIRETRUCK","FIRETRUK","LGUARD","PBUS","POLICE","POLICE2","POLICE3","POLICE4","POLICEB","POLICEOLD1","POLICEOLD2","POLICET","POLMAV","PRANGER","PREDATOR","RIOT","RIOT2","SHERIFF","SHERIFF2"}
+                local function contains(table, val)
+                    for i=1,#table do
+                       if table[i] == val then 
+                          return true
+                       end
+                    end
+                    return false
+                end
                 local cV = {}
                 while V.on do
                     local dr = vehicle.get_all_vehicles()
                     for j = 1, #dr do
-                        local bk = vehicle.get_ped_in_vehicle_seat(dr[j], -1)
-                        if not ped.is_ped_a_player(bk) then
-                            if not cV[dr[j]] or menu.has_thread_finished(cV[dr[j]]) then
-                                if not vehicle.is_toggle_mod_on(dr[j], 18) then
-                                    cV[dr[j]] = menu.create_thread(o.Upgradevehicles, dr[j])
+                        -- local name = vehicle.get_vehicle_model_label(dr[j])
+                        -- if not contains(emergency_vehicles, name) then
+                            if not vehicle.get_vehicle_has_been_owned_by_player(dr[j]) then
+                                local bk = vehicle.get_ped_in_vehicle_seat(dr[j], -1)
+                                if not ped.is_ped_a_player(bk) then
+                                    if not cV[dr[j]] or menu.has_thread_finished(cV[dr[j]]) then
+                                        if not vehicle.is_toggle_mod_on(dr[j], 18) then
+                                            if math.random(0,1) == 0 then cV[dr[j]] = menu.create_thread(o.Upgradevehicles, dr[j]) else vehicle.toggle_vehicle_mod(dr[j], 18, true) end
+                                        end
+                                    end
                                 end
+                                coroutine.yield(0)
                             end
-                        end
-                        coroutine.yield(0)
+                            coroutine.yield(0)
+                        -- end
                     end
                     coroutine.yield(500)
                 end
