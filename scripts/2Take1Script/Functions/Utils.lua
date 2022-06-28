@@ -182,6 +182,58 @@ function a.MaxVehicle(p, u, A)
         vehicle.set_vehicle_bulletproof_tires(p, true)
         vehicle.set_vehicle_window_tint(p, math.random(0, 3))
         vehicle.set_vehicle_number_plate_index(p, math.random(0, 5))
+    elseif u == 4 then
+        for B = 0, A or 47 do
+            if math.random(0,1) == 1 then
+                local C = vehicle.get_num_vehicle_mods(p, B) - 1
+                if C > 0 then
+                    C = math.random(0, C)
+                end
+                local F
+                if math.random(0, 10) > 5 then
+                    F = true
+                else
+                    F = false
+                end
+                -- 36 = white crash boxes (VMT_ICE)
+                -- 14 = horn
+                if B ~= eVehicleModType.VMT_ICE and B ~= eVehicleModType.VMT_HORN then
+                    vehicle.set_vehicle_mod(p, B, C, F)
+                    vehicle.toggle_vehicle_mod(p, C, true)
+                end
+            end
+        end
+        local name = vehicle.get_vehicle_model_label(p)
+        if name ~= "MULE" and name ~= "MULE2" and name ~= "PANTO" then
+            for D = 0, 20 do
+                if vehicle.does_extra_exist(p, D) then
+                    if math.random(0,1) == 1 then
+                    vehicle.set_vehicle_extra(p, D, true)
+                    end
+                end
+            end
+        end
+        vehicle.set_vehicle_bulletproof_tires(p, GetRandomBool())
+        if math.random(0,100) > 70 then
+            vehicle.set_vehicle_window_tint(p, math.random(0, 3))
+        end
+        vehicle.set_vehicle_number_plate_index(p, math.random(0, 5))
+
+        -- vehicle.set_vehicle_mod(p, 18, true, true)
+        vehicle.toggle_vehicle_mod(p, 18, true)
+
+        if math.random(0,1000) == 22 then
+            vehicle.set_vehicle_custom_primary_colour(p, math.random(0, 0xffffff))
+        end
+        if math.random(0,1000) == 44 then
+            vehicle.set_vehicle_custom_secondary_colour(p, math.random(0, 0xffffff))
+        end
+        if math.random(0,1000) == 66 then
+            vehicle.set_vehicle_custom_pearlescent_colour(p, math.random(0, 0xffffff))
+        end
+        if math.random(0,1000) == 88 then
+            vehicle.set_vehicle_custom_wheel_colour(p, math.random(0, 0xffffff))
+        end
     end
 end
 function a.RepairVehicle(p)
