@@ -11,3 +11,5 @@ The successor of [**haekkzers 2Take1Script**](https://github.com/haekkzer/2Take1
 ### [**Installation Guide, Features List and more**](https://github.com/DemonKiya/2Take1Script-Revive/wiki)
 
 Note by maintainer: Since the author DemonKiya now tries everything in their power to hide what they are doing in their code, i would advise against running this ever again. Either stick with versions prior to 2.6.0 or run it without trusted mode
+
+You can find the decompiled code here: https://github.com/Bluscream/2Take1Script-Revive/tree/unluac
